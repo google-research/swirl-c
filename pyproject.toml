@@ -1,0 +1,56 @@
+[project]
+name = "swirl_c"
+description = "Swirl-C is a computational fluid dynamics simulation framework for compressible turbulent flows implemented with TensorFlow."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Patrick Meagher", email="meagherp@google.com"},
+  {name = "Qing Wang", email="wqing@google.com"},
+  {name = "Cenk Gazen", email="bcg@google.com"},
+  {name = "Yi-fan Chen", email="yifanchen@google.com"},
+  ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: Apache Software License",
+    "Intended Audience :: Science/Research",
+]
+keywords = []
+
+# pip dependencies of the project
+dependencies = [
+    "absl-py",
+    "attrs",
+    "einops",
+    "fancyflags",
+    "jax",
+    "numpy",
+    "scipy",
+    "six",
+    "swirl-dynamics@git+https://github.com/google-research/swirl-dynamics",
+    "swirl-lm@git+https://github.com/google-research/swirl-lm",
+    "tensorflow",
+]
+
+# This is set automatically by flit using `swirl_lm.__version__`
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://github.com/google-research/swirl_c"
+repository = "https://github.com/google-research/swirl_c"
+# Other: `documentation`, `changelog`
+
+[project.optional-dependencies]
+# Development deps (unittest, linting, formating,...)
+# Installed through `pip install .[dev]`
+dev = [
+    "pytest",
+    "pytest-xdist",
+    "pylint>=2.6.0",
+    "yapf",
+]
+
+[build-system]
+requires = ["flit_core >=3.5,<4"]
+build-backend = "flit_core.buildapi"

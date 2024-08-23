@@ -1,0 +1,41 @@
+include "devtools/blueprint/bluze/public/bluze.ncl";
+include bytes "third_party/py/swirl_c/bluze.textproto" as textproto;
+
+// See go/bluze/guide before editing. To check the generated final blueprint run
+// rncl third_party/py/swirl_c/swirl_c.blueprint printproto blueprint_file
+
+BUILD_AND_TEST_PATTERNS = [
+  "//third_party/py/swirl_c/...",
+];
+
+blueprint_file = ::bluze::BlueprintFile(
+  textproto,
+
+  project_name = "swirl_c",
+  teams_product_id = 1425073581660,
+  tech_lead = ["bcg", "wqing", "yifanchen"],
+  dev_mailing_list = "swirl_c-dev@google.com",
+  mdb_groups = ["sim-research"],
+  buganizer_component_ids = [1085850],
+  metadata_path = "//depot/google3/third_party/py/swirl_c/METADATA",
+
+  // Customize your blueprint here: go/blueprint/howto-write.
+  buildable_units = [
+    ::blueprint::BuildableUnit(
+      name = "swirl_c",
+      enable_release = false,
+      enable_continuous_build = true,  // TAP
+      continuous_build_email = ::blueprint::ContinuousBuildEmailInfo(
+        build_cop_email_addrs = ["tf-sim-dev+tap@google.com"]),
+      build_patterns = BUILD_AND_TEST_PATTERNS,
+      test_patterns = BUILD_AND_TEST_PATTERNS,
+      test_flags = ["--compilation_mode=opt"]),
+  ],
+
+  continuous_tests = [
+    ::blueprint::ContinuousTest(
+      name = "third_party.py.swirl_c",
+      buildable_unit_name = "swirl_c",
+    ),
+  ],
+);

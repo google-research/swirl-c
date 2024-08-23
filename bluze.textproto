@@ -1,0 +1,23 @@
+# proto-file: devtools/blueprint/blueprint_file.proto
+# proto-message: BlueprintFile
+# DO NOT EDIT! Regenerate the contents by running go/bluze after changing any BUILD file or the Blueprint.
+# Override the default values in swirl_c.blueprint instead.
+
+buildable_unit: {
+  name: "swirl_c"
+  build_pattern: "//third_party/py/swirl_c/..."
+  test_pattern: "//third_party/py/swirl_c/..."
+  test_tag_filter: "-nofastbuild"
+  build_tag_filter: "-nofastbuild"
+  enable_coverage: true
+  enable_presubmit: true
+  enable_continuous_build: true
+  continuous_build_email: {
+    build_cop_email_id: "swirl_c-dev+buildgardener@google.com"
+  }
+  enable_release: false
+}
+continuous_tests: {
+  name: "swirl_c"
+  buildable_unit_name: "swirl_c"
+}
